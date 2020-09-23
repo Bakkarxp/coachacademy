@@ -3,4 +3,4 @@ project(coachacademy)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(coachacademy  Level2/week_01/ThreePlusOne.cpp)
+add_executable(coachacademy  Level2/week_01/MotherBear.cpp)
