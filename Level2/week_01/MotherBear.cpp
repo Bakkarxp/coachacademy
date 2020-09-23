@@ -26,29 +26,63 @@ std::string clean(std::string s){
 }
 
 bool ispalindrome(std::string s){
-
+    std::string firstHalf;
+    std::string secondHalf;
+    std::string secondHalfInv;
     if(s.size()%2==0){
-
+        firstHalf = s.substr(0,s.size()/2);
+        secondHalf = s.substr(s.size()/2,s.size());
+        std::reverse(secondHalf.begin(),secondHalf.end());
+//        cout<<s<<endl;
+//        cout<<firstHalf<<endl;
+//        cout <<secondHalf<<endl;
+        if(firstHalf==secondHalf){
+            //cout<<"true";
+            return true;
+        } else{
+            return false;
+        }
     }else{
-
+        int half = (s.size()-1)/2;
+        firstHalf = s.substr(0,half);
+        secondHalf = s.substr(half+1,s.size());
+        std::reverse(secondHalf.begin(),secondHalf.end());
+//        cout<<s<<endl;
+//        cout<<firstHalf<<endl;
+//        cout <<secondHalf<<endl;
+        if(firstHalf==secondHalf){
+            //cout<<"true";
+            return true;
+        } else{
+            return false;
+        }
     }
 
-    return true;
+   //return true;
 }
 
 int main() {
-    std::vector<std::string> statements;
-    std::vector<std::string> results;
-    std::string statment;
-    while(statment!="DONE"){
-        std::getline(std::cin,statment);
-        trim(statment);
-        if(statment=="DONE"){
+    std::vector<bool> results;
+    std::string statement;
+    while(statement != "DONE"){
+        std::getline(std::cin, statement);
+        trim(statement);
+        if(statement == "DONE"){
             break;
         }
-        cout<<clean(statment)<<endl;
-    }
+        //cout << clean(statement) << endl;
+        std::string cleanedString;
+        cleanedString= clean(statement);
+        results.push_back(ispalindrome(cleanedString));
 
+    }
+    for(bool b : results){
+        if(b == true){
+            cout<<"You won't be eaten!"<<endl;
+        }else{
+            cout<<"Uh oh.."<<endl;
+        }
+    }
 
     //char *statement;
     //cin.getline(statement);
