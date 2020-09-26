@@ -44,15 +44,15 @@ int main(){
         if(brightness<-1000'000'000||brightness>1000'000'000){
             return -1;
         }
-        a.push_back(brightness);
+        a.push_back(abs(brightness));
     }
     for(int i=1; i <= m; i++){
         long long brightness;
         cin>>brightness;
-        if(brightness<=-1000'000'000||brightness>=1000'000'000){
+        if(brightness<-1000'000'000||brightness>1000'000'000){
             return -1;
         }
-        b.push_back(brightness);
+        b.push_back(abs(brightness));
     }
     // sorting
     std::sort(a.begin(), a.end(), std::greater<long long>());
