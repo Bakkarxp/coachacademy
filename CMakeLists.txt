@@ -3,4 +3,4 @@ project(coachacademy)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(coachacademy Expermenting.cpp)
+add_executable(coachacademy ForText.cpp)
