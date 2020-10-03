@@ -10,7 +10,7 @@ using std::endl;
 
 void equalizeSize(vector<char> &num1,vector<char> &num2){
 
-    int sizeDiff;
+   unsigned int sizeDiff;
     if(num1.size()>num2.size()){
         sizeDiff = num1.size()-num2.size();
     } else{
@@ -34,20 +34,32 @@ void equalizeSize(vector<char> &num1,vector<char> &num2){
     cout<<endl;
 }
 
+vector<char> addBigInt(vector<char> num1,vector<char> num2){
+
+
+
+    
+    return vector<char>();
+}
+
 int main()
 {
 
-    vector<char> num1={'8','8','3','6','2','0','9'};
+    vector<char> num1={'6','2','0','6','2','0','9'};
     vector<char> num2={'9','5','8','9'};
 
     equalizeSize(num1,num2);
 
     char carry{'0'};
     vector<char> sum(num1.size(),'0');
-    for(int i=num1.size()-1; i>=0;i--){
-        sum[i]=((carry-'0')+(num1[i]-'0')+(num2[i]-'0'))+'0';
+    for(char c:sum){
+        cout<<c;
+    }
+    cout<<endl;
+    for(int i = (int) num1.size()-1; i>=0;i--){
+        sum[i]=((carry -'0')+(num1[i] -'0')+(num2[i] -'0'))+'0';
         if(i!=0){
-            if(sum[i]>=10){
+            if(sum[i]>'9'){
                 carry = '1';
                 sum[i]-=10;
             } else{
@@ -55,6 +67,8 @@ int main()
             }
         }
     }
+
+    //Check the last digit in the left
     if(sum[0] > '9')
     {
         sum[0]-= 10;
