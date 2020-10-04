@@ -114,12 +114,12 @@ vector<char> divideBigInt(vector<char> dividend, vector<char> divisor){
 
 pair<vector<char>, long long> divideByLl(vector<char> dividend, long long divisor){
     long long rem = 0;
-    vector<char> result; result.resize(10000);
+    vector<char> result(10000);
 
-    for(int indx=0, len = dividend.size(); indx<len; ++indx)
+    for(int i=0; i< dividend.size(); ++i)
     {
-        rem = (rem * 10) + (dividend[indx] - '0');
-        result[indx] = rem / divisor + '0';
+        rem = (rem * 10) + (dividend[i] - '0');
+        result[i] = rem / divisor + '0';
         rem %= divisor;
     }
     result.resize( dividend.size() );
@@ -135,14 +135,15 @@ pair<vector<char>, long long> divideByLl(vector<char> dividend, long long diviso
     return make_pair(result, rem);
 }
 
+
 int main()
 {
 
-    vector<char> num1={'6','2','0','6','2','0','9'};
+    vector<char> num1={'6','2','0'};
     vector<char> num2={'9','5'};
 //    vector<char>sum = addBigInt(num1,num2);
 //    vector<char>sum = multiplyBigInt(num1,num2);
-    auto result = divideByLl(num1,3);
+    auto result = divideByLl(num1,15);
     cout<<result.second<<endl;
     for(auto c:result.first){
         cout<<c;
