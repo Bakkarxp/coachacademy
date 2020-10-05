@@ -4,6 +4,7 @@
 
 #ifndef COACHACADEMY_BIGINT_H
 #define COACHACADEMY_BIGINT_H
+#include <iostream>
 #include <vector>
 using std::vector;
 using std::pair;
@@ -18,14 +19,34 @@ public:
     explicit BigInt(vector<char> num, bool sign);
     explicit BigInt(const BigInt &bigInt);
 
-    // Getter & Setters
+    // Getters & Setters
     bool getSign()const{return m_sign;}
     void setSign(bool sign){this->m_sign=sign;}
     vector<char> getNumber()const{return m_number;}
     void setNumber(vector<char> number){this->m_number=number;}
 
     // Operators
+    // Arithmetic operators
 
+    // Relational Operators
+    bool operator<(const BigInt &rhs) const;
+    bool operator<=(const BigInt &rhs) const;
+    bool operator>(const BigInt &rhs) const;
+    bool operator>=(const BigInt &rhs) const;
+
+
+    friend bool operator<(const BigInt &lhs, const BigInt &rhs);
+    friend bool operator>(const BigInt &lhs, const BigInt &rhs);
+    friend bool operator<=(const BigInt &lhs, const BigInt &rhs);
+    friend bool operator>=(const BigInt &lhs, const BigInt &rhs);
+
+    // Stream operators
+    friend std::ostream &operator<<(std::ostream &os, const BigInt &anInt);
+    friend std::istream &operator>>(std::istream &in, BigInt &anInt);
+
+    // Equality operators
+    friend bool operator==(const BigInt &lhs, const BigInt &rhs);
+    friend bool operator!=(const BigInt &lhs, const BigInt &rhs);
 
 
 private:
