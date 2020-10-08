@@ -27,6 +27,18 @@ public:
 
     // Operators
     // Arithmetic operators
+    BigInt operator+(BigInt num);
+    BigInt operator-(BigInt num);
+    BigInt operator*(BigInt num);
+    BigInt operator/(BigInt num);
+    BigInt& operator+=(BigInt num);
+    BigInt& operator-=(BigInt num);
+    BigInt& operator*=(BigInt num);
+    BigInt& operator/=(BigInt num);
+    BigInt& operator++();
+    BigInt operator++(int);
+    BigInt& operator--();
+    BigInt operator--(int );
 
     // Relational Operators
     bool operator<(const BigInt &rhs) const;
@@ -34,19 +46,15 @@ public:
     bool operator>(const BigInt &rhs) const;
     bool operator>=(const BigInt &rhs) const;
 
-
-    friend bool operator<(const BigInt &lhs, const BigInt &rhs);
-    friend bool operator>(const BigInt &lhs, const BigInt &rhs);
-    friend bool operator<=(const BigInt &lhs, const BigInt &rhs);
-    friend bool operator>=(const BigInt &lhs, const BigInt &rhs);
+    // Equality operators
+    friend bool operator==(const BigInt &lhs, const BigInt &rhs);
+    friend bool operator!=(const BigInt &lhs, const BigInt &rhs);
 
     // Stream operators
     friend std::ostream &operator<<(std::ostream &os, const BigInt &anInt);
     friend std::istream &operator>>(std::istream &in, BigInt &anInt);
 
-    // Equality operators
-    friend bool operator==(const BigInt &lhs, const BigInt &rhs);
-    friend bool operator!=(const BigInt &lhs, const BigInt &rhs);
+
 
 
 private:
@@ -56,7 +64,6 @@ private:
     vector<char> subtractBigInt(vector<char> minuend, vector<char> subtrahend);
     vector<char> multiplyBigInt(vector<char> num1, vector<char> num2);
     pair<vector<char>, long long> divideByLl(vector<char> dividend, long long divisor);
-
 
 };
 
