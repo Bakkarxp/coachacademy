@@ -4,31 +4,31 @@
 #include <iostream>
 #include <vector>
 
-using std::vector;
 using std::pair;
 using std::cout;
 using std::endl;
+using std::string;
 
-void equalizeSize(vector<char> &num1,vector<char> &num2){
+void equalizeSize(string &num1,string &num2){
    unsigned int sizeDiff;
-    if(num1.size()>num2.size()){
-        sizeDiff = num1.size()-num2.size();
+    if(num1.length()>num2.length()){
+        sizeDiff = num1.length()-num2.length();
     } else{
-        sizeDiff = num2.size()-num1.size();
+        sizeDiff = num2.length()-num1.length();
     }
     // equalize vector sizes
-    if(num1.size()>num2.size()){
+    if(num1.length()>num2.length()){
         num2.insert(num2.begin(),sizeDiff,'0');
     } else{
         num1.insert(num1.begin(),sizeDiff,'0');
     }
 }
 
-vector<char> addBigInt(vector<char> num1,vector<char> num2){
+string addBigInt(string num1,string num2){
     equalizeSize(num1,num2);
     char carry{'0'};
-    vector<char> sum(num1.size(),'0');
-    for(int i = (int) num1.size()-1; i>=0;i--){
+    string sum(num1.length(),'0');
+    for(int i = (int) num1.length()-1; i>=0;i--){
         sum[i]=((carry -'0')+(num1[i] -'0')+(num2[i] -'0'))+'0';
         if(i!=0){
             if(sum[i]>'9'){
@@ -48,12 +48,12 @@ vector<char> addBigInt(vector<char> num1,vector<char> num2){
     return sum;
 }
 
-vector<char> subtractBigInt(vector<char> minuend, vector<char> subtrahend){
+string subtractBigInt(string minuend, string subtrahend){
     // minuend should be greater than subtrahend
     equalizeSize(minuend, subtrahend);
-    vector<char> difference(minuend.size(), '0');
+    string difference(minuend.length(), '0');
     // subtract
-    for(int i = (int) minuend.size() - 1; i >= 0; i--){
+    for(int i = (int) minuend.length() - 1; i >= 0; i--){
         if(minuend[i] < subtrahend[i]){
             minuend[i]+=10;
             minuend[i - 1]--;
@@ -61,28 +61,28 @@ vector<char> subtractBigInt(vector<char> minuend, vector<char> subtrahend){
         difference[i]= (minuend[i] - '0') - (subtrahend[i] - '0') + '0';
     }
     // Remove Left zeros
-    while(difference[0] == '0' && difference.size() != 1){
+    while(difference[0] == '0' && difference.length() != 1){
         difference.erase(difference.begin());
     }
 
     return difference;
 }
 
-vector<char> multiplyBigInt(vector<char> num1, vector<char> num2){
+string multiplyBigInt(string num1, string num2){
     //
-    if(num1.size()>num2.size()){
+    if(num1.length()>num2.length()){
         num1.swap(num2);
     }
-    vector<char> result{'0'};
+    string result{'0'};
 
     // num1 is the smaller
-    for(int i = (int) num1.size()-1; i>=0;i--){
+    for(int i = (int) num1.length()-1; i>=0;i--){
 
-        vector<char> temp(num2.size());
+        string temp(num2.length());
         int carry = 0;
 
         // num2 is the bigger
-        for(int j = (int) num2.size()-1; j>=0;j--){
+        for(int j = (int) num2.length()-1; j>=0;j--){
             temp[j] = (num2[j]-'0')*(num1[i]-'0')+carry;
             if(temp[j]>9){
                 carry = temp[j]/10;
@@ -95,26 +95,26 @@ vector<char> multiplyBigInt(vector<char> num1, vector<char> num2){
         if(carry>0){
             temp.insert(temp.begin(),(carry+'0'));
         }
-        temp.insert(temp.end(),num1.size()-i-1,'0');
+        temp.insert(temp.end(),num1.length()-i-1,'0');
         result = addBigInt(result,temp);
     }
 
     // Remove Left zeros
-    while(result[0] == '0' && result.size() != 1){
+    while(result[0] == '0' && result.length() != 1){
         result.erase(result.begin());
     }
     return result;
 }
 
-vector<char> divideBigInt(vector<char> dividend, vector<char> divisor){
+string divideBigInt(string dividend, string divisor){
     vector<char> reminder;
 
     return vector<char>();
 }
 
-pair<vector<char>, long long> divideByLl(vector<char> dividend, long long divisor){
+pair<string, long long> divideByLl(string dividend, long long divisor){
     long long rem = 0;
-    vector<char> result; result.resize(10000);
+    string result; result.resize(10000);
 
     for(int indx=0, len = dividend.size(); indx<len; ++indx)
     {
@@ -138,8 +138,8 @@ pair<vector<char>, long long> divideByLl(vector<char> dividend, long long diviso
 int main()
 {
 
-    vector<char> num1={'6','2','0','6','2','0','9'};
-    vector<char> num2={'9','5'};
+    string num1="645842";
+    string num2="25";
 //    vector<char>sum = addBigInt(num1,num2);
 //    vector<char>sum = multiplyBigInt(num1,num2);
     auto result = divideByLl(num1,3);

@@ -17,7 +17,7 @@ public:
     // Constructors
     explicit BigInt()=default;
     explicit BigInt(vector<char> num, bool sign);
-    explicit BigInt(const BigInt &bigInt);
+    //BigInt(const BigInt &bigInt);
 
     // Getters & Setters
     bool getSign()const{return m_sign;}

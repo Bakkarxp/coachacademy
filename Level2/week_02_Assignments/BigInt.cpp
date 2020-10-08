@@ -129,3 +129,7 @@ void BigInt::removeLeadingZeros(vector<char> &num) {
         m_number.erase(m_number.begin());
     }
 }
+
+BigInt::BigInt(vector<char> num, bool sign) {
+
+}
