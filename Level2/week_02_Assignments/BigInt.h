@@ -16,8 +16,10 @@ private:
 
 public:
     // Constructors
-    explicit BigInt()=default;
+    explicit BigInt();
     explicit BigInt(string num, bool sign);
+    explicit BigInt(string num);
+    explicit BigInt(long long num);
     //BigInt(const BigInt &bigInt);
 
     // Getters & Setters
@@ -52,8 +54,9 @@ public:
     friend bool operator!=(const BigInt &lhs, const BigInt &rhs);
 
     // Stream operators
-    friend std::ostream &operator<<(std::ostream &os, const BigInt &anInt);
+    friend std::ostream & operator<<(std::ostream &os, const BigInt &anInt);
     friend std::istream &operator>>(std::istream &in, BigInt &anInt);
+
 
 
 

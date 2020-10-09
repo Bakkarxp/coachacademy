@@ -4,6 +4,50 @@
 
 #include "BigInt.h"
 
+// Constructor
+BigInt::BigInt(string num, bool sign):m_number(num),m_sign(sign) {}
+BigInt::BigInt():m_number("0"),m_sign(false){}
+BigInt::BigInt(string num) {
+    if( isdigit(num[0]) )
+    {
+        setNumber(num);
+        m_sign = false;
+    }
+    else
+    {
+        setNumber( num.substr(1) );
+        m_sign = (num[0] == '-');
+    }
+}
+BigInt::BigInt(long long num) {
+    if(num<0){
+        m_sign = true;
+        m_number = std::to_string(std::abs(num));
+    }else{
+        m_sign = false;
+        m_number = std::to_string(num);
+    }
+}
+
+
+
+
+
+std::ostream &operator<<(std::ostream &os, const BigInt &anInt) {
+    if(anInt.getSign()) std::cout<<"-";
+    std::cout<<anInt.getNumber();
+    return os;
+}
+
+std::istream &operator>>(std::istream &in, BigInt &anInt) {
+
+    return in;
+}
+
+
+
+
+// utitlyu functions
 void BigInt::equalizeSize(string &num1, string &num2) {
     unsigned int sizeDiff;
     if(num1.size()>num2.size()){
@@ -130,6 +174,68 @@ void BigInt::removeLeadingZeros(string &num) {
     }
 }
 
-BigInt::BigInt(string num, bool sign) {
-
+BigInt BigInt::operator+(BigInt num) {
+    return BigInt();
 }
+
+BigInt BigInt::operator-(BigInt num) {
+    return BigInt();
+}
+
+BigInt BigInt::operator*(BigInt num) {
+    return BigInt();
+}
+
+BigInt BigInt::operator/(BigInt num) {
+    return BigInt();
+}
+
+BigInt &BigInt::operator+=(BigInt num) {
+    return <#initializer#>;
+}
+
+BigInt &BigInt::operator-=(BigInt num) {
+    return <#initializer#>;
+}
+
+BigInt &BigInt::operator*=(BigInt num) {
+    return <#initializer#>;
+}
+
+BigInt &BigInt::operator/=(BigInt num) {
+    return <#initializer#>;
+}
+
+BigInt &BigInt::operator++() {
+    return <#initializer#>;
+}
+
+BigInt BigInt::operator++(int) {
+    return BigInt();
+}
+
+BigInt &BigInt::operator--() {
+    return <#initializer#>;
+}
+
+BigInt BigInt::operator--(int) {
+    return BigInt();
+}
+
+bool BigInt::operator<(const BigInt &rhs) const {
+    return false;
+}
+
+bool BigInt::operator<=(const BigInt &rhs) const {
+    return false;
+}
+
+bool BigInt::operator>(const BigInt &rhs) const {
+    return false;
+}
+
+bool BigInt::operator>=(const BigInt &rhs) const {
+    return false;
+}
+
+
