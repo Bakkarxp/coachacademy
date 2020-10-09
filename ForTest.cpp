@@ -78,7 +78,7 @@ string multiplyBigInt(string num1, string num2){
     // num1 is the smaller
     for(int i = (int) num1.length()-1; i>=0;i--){
 
-        string temp(num2.length());
+        string temp(num2);
         int carry = 0;
 
         // num2 is the bigger
@@ -107,9 +107,9 @@ string multiplyBigInt(string num1, string num2){
 }
 
 string divideBigInt(string dividend, string divisor){
-    vector<char> reminder;
+   string reminder;
 
-    return vector<char>();
+    return string ("0");
 }
 
 pair<string, long long> divideByLl(string dividend, long long divisor){
@@ -142,10 +142,7 @@ int main()
     string num2="25";
 //    vector<char>sum = addBigInt(num1,num2);
 //    vector<char>sum = multiplyBigInt(num1,num2);
-    auto result = divideByLl(num1,3);
-    cout<<result.second<<endl;
-    for(auto c:result.first){
-        cout<<c;
-    }
+    auto result = subtractBigInt(num1,num2);
+    cout<<result<<endl;
     return 0;
 }

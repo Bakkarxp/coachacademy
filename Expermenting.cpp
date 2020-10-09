@@ -13,6 +13,8 @@ using namespace std;
 //    }
 //    return reverse;
 //}
+
+// Linked List
 template<typename T>
 class LinkedList{
 private:
