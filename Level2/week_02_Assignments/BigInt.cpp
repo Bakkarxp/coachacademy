@@ -175,7 +175,13 @@ void BigInt::removeLeadingZeros(string &num) {
 }
 
 BigInt BigInt::operator+(BigInt num) {
-    return BigInt();
+    string temp;
+    bool sign = false;
+    if(this->m_sign==num.m_sign){
+        temp = addBigInt(this->m_number,num.m_number);
+        sign = this->m_sign;
+    }
+    return BigInt(temp,sign);
 }
 
 BigInt BigInt::operator-(BigInt num) {
