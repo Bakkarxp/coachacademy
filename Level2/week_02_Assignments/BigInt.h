@@ -19,7 +19,7 @@ public:
     explicit BigInt();
     explicit BigInt(string num, bool sign);
     explicit BigInt(string num);
-    explicit BigInt(long long num);
+    BigInt(long long num);
     //BigInt(const BigInt &bigInt);
 
     // Getters & Setters
@@ -30,14 +30,14 @@ public:
 
     // Operators
     // Arithmetic operators
-    BigInt operator+(BigInt num);
+    BigInt operator+(const BigInt &num);
     BigInt operator-(BigInt num);
-    BigInt operator*(BigInt num);
+    BigInt operator*(const BigInt &num);
     BigInt operator/(BigInt num);
-    BigInt& operator+=(BigInt num);
-    BigInt& operator-=(BigInt num);
-    BigInt& operator*=(BigInt num);
-    BigInt& operator/=(BigInt num);
+    BigInt& operator+=(const BigInt &num);
+    BigInt& operator-=(const BigInt &num);
+    BigInt& operator*=(const BigInt &num);
+    BigInt& operator/=(const BigInt &num);
     BigInt& operator++();
     BigInt operator++(int);
     BigInt& operator--();
@@ -50,8 +50,8 @@ public:
     bool operator>=(const BigInt &rhs) const;
 
     // Equality operators
-    friend bool operator==(const BigInt &lhs, const BigInt &rhs);
-    friend bool operator!=(const BigInt &lhs, const BigInt &rhs);
+    bool operator==(const BigInt &rhs) const;
+    bool operator!=(const BigInt &rhs) const;
 
     // Stream operators
     friend std::ostream & operator<<(std::ostream &os, const BigInt &anInt);
@@ -62,12 +62,13 @@ public:
 
 
 private:
-    void equalizeSize(string &num1,string &num2);
+    static void equalizeSize(string &num1,string &num2);
     void removeLeadingZeros(string &num);
-    string addBigInt(string num1,string num2);
-    string subtractBigInt(string minuend, string subtrahend);
-    string multiplyBigInt(string num1, string num2);
-    pair<string, long long> divideByLl(string dividend, long long divisor);
+    static string addBigInt(string num1,string num2);
+    static string subtractBigInt(string minuend, string subtrahend);
+    static string multiplyBigInt(string num1, string num2);
+    static string divideByLl(string dividend, long long divisor);
+    static long long toInt(const string& num);
 
 };
 

@@ -4,8 +4,10 @@
 
 #include "BigInt.h"
 
+#include <utility>
+
 // Constructor
-BigInt::BigInt(string num, bool sign):m_number(num),m_sign(sign) {}
+BigInt::BigInt(string num, bool sign):m_number(std::move(num)),m_sign(sign) {}
 BigInt::BigInt():m_number("0"),m_sign(false){}
 BigInt::BigInt(string num) {
     if( isdigit(num[0]) )
@@ -145,7 +147,7 @@ string BigInt::multiplyBigInt(string num1, string num2) {
     return result;
 }
 
-pair<string, long long> BigInt::divideByLl(string dividend, long long int divisor) {
+string BigInt::divideByLl(string dividend, long long int divisor) {
     long long rem = 0;
     string result; result.resize(10000);
 
@@ -162,10 +164,10 @@ pair<string, long long> BigInt::divideByLl(string dividend, long long int diviso
         result.erase(result.begin());
     }
 
-    if(result.size() == 0)
+    if(result.empty())
         result.push_back('0');
 
-    return make_pair(result, rem);
+    return result;
 }
 
 void BigInt::removeLeadingZeros(string &num) {
@@ -174,74 +176,135 @@ void BigInt::removeLeadingZeros(string &num) {
     }
 }
 
-BigInt BigInt::operator+(BigInt num) {
+BigInt BigInt::operator+(const BigInt &num) {
     string temp;
     bool sign = false;
     if(this->m_sign==num.m_sign){
         temp = addBigInt(this->m_number,num.m_number);
         sign = this->m_sign;
+    }else{
+        if(this->m_number>num.m_number){
+            temp = subtractBigInt(this->m_number,num.m_number);
+            sign = this->m_sign;
+        } else{
+            temp = subtractBigInt(num.m_number,this->m_number);
+            sign = num.m_sign;
+        }
     }
+    if(temp=="0") sign = false;
+
     return BigInt(temp,sign);
 }
 
 BigInt BigInt::operator-(BigInt num) {
-    return BigInt();
+    num.setSign(!num.getSign()); // invert the sign of right operand and carry the addition operation
+    return (*this)+num;
 }
 
-BigInt BigInt::operator*(BigInt num) {
-    return BigInt();
+BigInt BigInt::operator*(const BigInt &num) {
+    string temp;
+    bool sign = false;
+    temp = multiplyBigInt(this->m_number,num.m_number);
+    if(this->m_sign==num.m_sign){
+        sign = false;
+    } else{
+        sign = true;
+    }
+    if(temp=="0") sign = false;
+    return BigInt(temp, sign);
 }
 
 BigInt BigInt::operator/(BigInt num) {
-    return BigInt();
+    string temp;
+    bool sign = false;
+    long long divisor = toInt(num.getNumber());
+    temp = divideByLl(this->m_number, divisor);
+    if(this->m_sign==num.m_sign){
+        sign = false;
+    } else{
+        sign = true;
+    }
+    if(temp=="0") sign = false;
+    return BigInt(temp, sign);
 }
 
-BigInt &BigInt::operator+=(BigInt num) {
-    return <#initializer#>;
+BigInt &BigInt::operator+=(const BigInt &num) {
+    return (*this) = (*this) + num;
 }
 
-BigInt &BigInt::operator-=(BigInt num) {
-    return <#initializer#>;
+BigInt &BigInt::operator-=(const BigInt &num) {
+    return (*this) = (*this) - num;
 }
 
-BigInt &BigInt::operator*=(BigInt num) {
-    return <#initializer#>;
+BigInt &BigInt::operator*=(const BigInt &num) {
+    return (*this) = (*this) * num;
 }
 
-BigInt &BigInt::operator/=(BigInt num) {
-    return <#initializer#>;
+BigInt &BigInt::operator/=(const BigInt &num) {
+    return (*this) = (*this) / num;
 }
 
 BigInt &BigInt::operator++() {
-    return <#initializer#>;
+    return (*this) = (*this) + 1;
 }
 
 BigInt BigInt::operator++(int) {
-    return BigInt();
+    BigInt temp = *this;
+    (*this) = (*this) + 1;
+    return temp;
 }
 
 BigInt &BigInt::operator--() {
-    return <#initializer#>;
+    return (*this) = (*this) - 1;
 }
 
 BigInt BigInt::operator--(int) {
-    return BigInt();
+    BigInt temp = *this;
+    (*this) = (*this) - 1;
+    return temp;
 }
 
 bool BigInt::operator<(const BigInt &rhs) const {
-    return false;
+    if(!this->m_sign && rhs.m_sign){
+        return false;
+    } else if(this->m_sign && !rhs.m_sign){
+        return true;
+    // signs are equal and +ve
+    } else if(this->m_sign == rhs.m_sign && !this->m_sign){
+        return this->m_number<rhs.m_number;
+    // signs are equal and -ve
+    } else if(this->m_sign == rhs.m_sign && this->m_sign){
+        return this->m_number>rhs.m_number;
+    // signs are not equal
+    }
 }
 
 bool BigInt::operator<=(const BigInt &rhs) const {
-    return false;
+    return !this->operator>(rhs);
 }
 
 bool BigInt::operator>(const BigInt &rhs) const {
-    return false;
+    return !this->operator<(rhs) && !this->operator==(rhs);
 }
 
 bool BigInt::operator>=(const BigInt &rhs) const {
+    return !this->operator<(rhs);;
+}
+
+long long BigInt::toInt(const string& num) {
+    long long sum = 0;
+    for(char i : num)
+        sum = (sum*10) + (i - '0');
+    return sum;
+}
+
+bool BigInt::operator==(const BigInt &rhs) const {
+    if(this->m_number==rhs.m_number && this->m_sign == rhs.m_sign) return true;
     return false;
+}
+
+bool BigInt::operator!=(const BigInt &rhs) const {
+    return !this->operator==(rhs);
 }
 
 

@@ -3,4 +3,7 @@ project(coachacademy)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(coachacademy ForTest.cpp Level2/week_02_Assignments/BigInt.h Level2/week_02_Assignments/BigInt.cpp)
+add_executable(coachacademy ForTest.cpp
+        Level2/week_02_Assignments/BigInt.h
+        Level2/week_02_Assignments/BigInt.cpp
+        Level2/week_02_Assignments/Matrix.cpp Level2/week_02_Assignments/Matrix.h)

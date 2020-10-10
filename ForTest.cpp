@@ -2,6 +2,7 @@
 // Created by hkp28 on 21/09/2020.
 //
 #include <iostream>
+#include "Level2/week_02_Assignments/BigInt.h"
 #include <vector>
 
 using std::pair;
@@ -137,12 +138,23 @@ pair<string, long long> divideByLl(string dividend, long long divisor){
 
 int main()
 {
+    BigInt bigInt1("42");
+    BigInt bigInt2("25");
 
-    string num1="645842";
-    string num2="25";
+
+    cout<<"bigInt1 + bigInt2 = "<<bigInt1 + bigInt2<<endl;
+    cout<<"bigInt1 - bigInt2 = "<<bigInt1 - bigInt2<<endl;
+    cout<<"bigInt1 * bigInt2 = "<<bigInt1 * bigInt2<<endl;
+    cout<<"bigInt1 / bigInt2 = "<<bigInt1 / bigInt2<<endl;
+
+    cout<<"bigInt1++ = "<<bigInt1++<<endl;
+    cout<<"bigInt1 = "<<bigInt1 <<endl;
+
+//    string num1="645842";
+//    string num2="25";
 //    vector<char>sum = addBigInt(num1,num2);
 //    vector<char>sum = multiplyBigInt(num1,num2);
-    auto result = subtractBigInt(num1,num2);
-    cout<<result<<endl;
+//    auto result = subtractBigInt(num1,num2);
+//    cout<<bigInt1<<endl;
     return 0;
 }
