@@ -12,7 +12,8 @@ template<typename T>
 class Matrix {
 private:
     vector<vector<T>> matrix;
-    int
+    int rows, cols;
+
 public:
     Matrix();
 
@@ -33,12 +34,12 @@ Matrix<T>::Matrix() {
 template<typename T>
 vector<vector<T>> Matrix<T>::AddMatrix(vector<vector<T>> matrix1, vector<vector<T>> matrix2) {
     vector<vector<T>> result;
-    for (int i = 0; i < matrix1.size(); ++i) {
-        for (int j = 0; j < matrix2 ; ++j) {
-
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols ; ++j) {
+            result[i][j] = matrix1[i][j] +  matrix1[i][j];
         }
     }
-    return vector<vector<T>>();
+    return result;
 }
 
 template<typename T>

@@ -2,7 +2,7 @@
 // Created by hkp28 on 21/09/2020.
 //
 #include <iostream>
-#include "Level2/week_02_Assignments/BigInt.h"
+#include "Level2/week_02_Assignments/Matrix.h"
 #include <vector>
 
 using std::pair;
@@ -138,17 +138,22 @@ pair<string, long long> divideByLl(string dividend, long long divisor){
 
 int main()
 {
-    BigInt bigInt1("42");
-    BigInt bigInt2("25");
+    Matrix<int> matrix;
+//    BigInt bigInt1;
+//    BigInt bigInt2("25");
+//
+//    std::cin>>bigInt1;
+//    cout<< bigInt1.getSign()<<endl;
+//    cout<< bigInt1.getNumber()<<endl;
+//    cout<< endl << bigInt1<< endl;
 
-
-    cout<<"bigInt1 + bigInt2 = "<<bigInt1 + bigInt2<<endl;
-    cout<<"bigInt1 - bigInt2 = "<<bigInt1 - bigInt2<<endl;
-    cout<<"bigInt1 * bigInt2 = "<<bigInt1 * bigInt2<<endl;
-    cout<<"bigInt1 / bigInt2 = "<<bigInt1 / bigInt2<<endl;
-
-    cout<<"bigInt1++ = "<<bigInt1++<<endl;
-    cout<<"bigInt1 = "<<bigInt1 <<endl;
+//    cout<<"bigInt1 + bigInt2 = "<<bigInt1 + bigInt2<<endl;
+//    cout<<"bigInt1 - bigInt2 = "<<bigInt1 - bigInt2<<endl;
+//    cout<<"bigInt1 * bigInt2 = "<<bigInt1 * bigInt2<<endl;
+//    cout<<"bigInt1 / bigInt2 = "<<bigInt1 / bigInt2<<endl;
+//
+//    cout<<"bigInt1++ = "<<bigInt1++<<endl;
+//    cout<<"bigInt1 = "<<bigInt1 <<endl;
 
 //    string num1="645842";
 //    string num2="25";

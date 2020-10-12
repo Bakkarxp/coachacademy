@@ -57,10 +57,6 @@ public:
     friend std::ostream & operator<<(std::ostream &os, const BigInt &anInt);
     friend std::istream &operator>>(std::istream &in, BigInt &anInt);
 
-
-
-
-
 private:
     static void equalizeSize(string &num1,string &num2);
     void removeLeadingZeros(string &num);
@@ -69,6 +65,7 @@ private:
     static string multiplyBigInt(string num1, string num2);
     static string divideByLl(string dividend, long long divisor);
     static long long toInt(const string& num);
+    string toString() const;
 
 };
 
